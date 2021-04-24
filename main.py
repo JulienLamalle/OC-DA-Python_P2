@@ -2,13 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-base_url = 'http://books.toscrape.com/'
-catalogue_selected_product_url = 'catalogue/a-light-in-the-attic_1000'
+base_url = 'http://books.toscrape.com'
+catalogue_selected_product_url = '/catalogue/a-light-in-the-attic_1000'
 
 response = requests.get(base_url + catalogue_selected_product_url)
 
 soup = BeautifulSoup(response.content, 'html.parser')
-product_page_url = base_url + catalogue_selected_product_url
 
 
 def get_universal_product_code():
@@ -65,7 +64,7 @@ def save_book_informations_to_csv(book_informations: dict):
     writer.writerow(book_informations)
 
 
-def get_book_informations(url):
+def get_book_informations():
   if response.status_code == 200:
     book_informations = {
       'universal_product_code': get_universal_product_code(),
@@ -81,4 +80,4 @@ def get_book_informations(url):
     save_book_informations_to_csv(book_informations)
 
 
-get_book_informations(product_page_url)
+get_book_informations()
