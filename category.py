@@ -6,10 +6,6 @@ import os
 base_url = 'http://books.toscrape.com'
 category_url = '/catalogue/category/books/romance_8'
 
-response = requests.get(base_url + category_url)
-
-soup = BeautifulSoup(response.content, 'html.parser')
-
 
 def get_all_books_link(url):
   response = requests.get(url)
@@ -79,7 +75,7 @@ def get_next_page(soup):
     next_page_link = base_url + category_url + '/' + next_button['href']
     print(next_page_link)
     get_all_books_link(next_page_link)
-  else: 
+  else:
     return
 
 
