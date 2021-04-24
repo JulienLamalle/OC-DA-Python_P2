@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
-import pathlib
 
 base_url = 'http://books.toscrape.com'
 category_url = '/catalogue/category/books/romance_8'
