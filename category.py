@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import os
+from pathlib import Path
 
 base_url = 'http://books.toscrape.com'
 category_url = '/catalogue/category/books/romance_8'
@@ -98,11 +99,15 @@ def get_book_informations(url):
 
 
 def save_book_informations_to_csv(book_informations: dict):
-  filename = 'category.csv'
-  file_exists = os.path.isfile(filename)
-  with open(f'category.csv', 'a', encoding='utf-8-sig') as csv_file:
+  category = 'romance'
+  dir_path = f'data/{category}'
+  filename = f'{category}.csv'
+  if not os.path.isdir(dir_path):
+    os.makedirs(dir_path, exist_ok=True)
+  file_path=os.path.join(dir_path, filename)
+  with open(f'{file_path}', 'a', encoding='utf-8-sig') as csv_file:
     writer = csv.DictWriter(csv_file, book_informations, dialect='excel')
-    if not file_exists:
+    if Path(f"{file_path}").stat().st_size == 0:
       writer.writeheader()
     writer.writerow(book_informations)
 
