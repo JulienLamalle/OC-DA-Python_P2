@@ -104,7 +104,7 @@ def save_book_informations_to_csv(book_informations: dict):
   filename = f'{category}.csv'
   if not os.path.isdir(dir_path):
     os.makedirs(dir_path, exist_ok=True)
-  file_path=os.path.join(dir_path, filename)
+  file_path = os.path.join(dir_path, filename)
   with open(f'{file_path}', 'a', encoding='utf-8-sig') as csv_file:
     writer = csv.DictWriter(csv_file, book_informations, dialect='excel')
     if Path(f"{file_path}").stat().st_size == 0:
