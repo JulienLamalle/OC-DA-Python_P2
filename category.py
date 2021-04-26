@@ -1,5 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
+from tqdm import tqdm
+from math import ceil
 class Category:
   
   def get_all_categories_links(self, url, b, user_choice, scheduler, c):
@@ -29,16 +31,18 @@ class Category:
         for book in book_url:
           final_books_urls.append(base_url + '/catalogue/' + book)
       if user_choice == 1 or user_choice == 2:
-        for book_url in final_books_urls:
-          b.get_book_informations(book_url, category, base_url)
-        self.get_next_page(soup, url, category, base_url, b)
+        with tqdm(total=100) as pbar:
+          for book_url in final_books_urls:
+            b.get_book_informations(book_url, category, base_url)
+            pbar.update(ceil((1/len(final_books_urls))*100))
+          self.get_next_page(soup, url, category, base_url, b, user_choice)
       else:
         return
   
-  def get_next_page(self, soup, url, category, base_url, b):
+  def get_next_page(self, soup, url, category, base_url, b, user_choice):
     next_button = soup.select_one('.next > a')
     if next_button:
       next_page_link = url + next_button['href']
-      self.get_all_books_link(next_page_link, category, base_url, b)
+      self.get_all_books_link(next_page_link, category, base_url, b, user_choice)
     else:
       return
