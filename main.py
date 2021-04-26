@@ -4,7 +4,9 @@ from book import Book
 from colorama import init
 class Main:
   
-  base_url = 'http://books.toscrape.com'
+  def __init__(self, base_url):
+    self.base_url = base_url
+  
 
   def perform(self, base_url):
     b = Book()
@@ -13,6 +15,7 @@ class Main:
     scheduler.get_user_name(base_url, scheduler, c , b)
 
 if __name__ == '__main__':
+  base_url = 'http://books.toscrape.com'
   init(autoreset=True)
-  main = Main()
-  main.perform(main.base_url)
+  main = Main(base_url)
+  main.perform(base_url)
