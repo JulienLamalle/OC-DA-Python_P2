@@ -28,14 +28,10 @@ class Category:
         del book_url[-1]
         for book in book_url:
           final_books_urls.append(base_url + '/catalogue/' + book)
-      if user_choice == 1:
+      if user_choice == 1 or user_choice == 2:
         for book_url in final_books_urls:
           b.get_book_informations(book_url, category, base_url)
         self.get_next_page(soup, url, category, base_url, b)
-      elif user_choice == 2:
-        for book_url in final_books_urls:
-          b.get_book_informations(book_url, category, base_url)
-          self.get_next_page(soup, url, category, base_url, b)
       else:
         return
   
