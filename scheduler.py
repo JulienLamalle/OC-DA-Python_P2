@@ -36,7 +36,7 @@ class Scheduler:
     category = categories[user_category_choice - 1]
     c.get_all_books_link(url, category, base_url, b, user_choice)
   
-  def url_exists_get(self, url: str, b, base_url):
+  def url_checker(self, url: str, b, base_url):
     try:
       response = requests.get(url)
       soup = BeautifulSoup(response.content, 'html.parser')
@@ -45,9 +45,9 @@ class Scheduler:
         category = b.get_category(soup)
         b.get_book_informations(url, category, base_url)
       except requests.exceptions.HTTPError:
-        return False
+        self.get_user_book_choice(b, base_url)
     except requests.exceptions.ConnectionError:
-      return False
+      self.get_user_book_choice(b, base_url)
 
   def get_user_book_choice(self, b, base_url):
     print("Pour que je puisse scrapper un livre pour vous merci de vous rendre sur l'url suivante et de me donner le lien du livre souhaité => http://books.toscrape.com/")
@@ -55,7 +55,7 @@ class Scheduler:
     while 'http' not in user_book_choice:
       user_book_choice = str(input('Merci de me fournir une url valide: '))
     else:
-      self.url_exists_get(user_book_choice, b, base_url)
+      self.url_checker(user_book_choice, b, base_url)
 
 
   def perform(self, user_choice, base_url, scheduler, c, b):
