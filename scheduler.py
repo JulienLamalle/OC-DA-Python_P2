@@ -1,17 +1,18 @@
 import requests
 from bs4 import BeautifulSoup
+from colorama import Fore, Back, Style
 class Scheduler:
 
   def get_user_name(self, base_url, scheduler, c, b):
-    print('Bonjour, quel est votre prénom ?')
-    user_name = str(input())
+    print(Fore.CYAN + 'Bonjour, quel est votre prénom ?')
+    user_name = str(Fore.CYAN + input())
     self.offer_the_features(user_name, base_url, scheduler, c, b)
 
   def offer_the_features(self, user_name, base_url, scheduler, c, b):
-    print(f'Je peux te proposer plusieurs choses que voici {user_name}:')
-    print('1. Scrapper tout le site')
-    print('2. Scrapper seulement une catégorie')
-    print('3. Scrapper seulement un livre')
+    print(Fore.CYAN + f'Je peux te proposer plusieurs choses que voici {user_name}:')
+    print(Fore.BLUE + '1. Scrapper tout le site')
+    print(Fore.MAGENTA + '2. Scrapper seulement une catégorie')
+    print(Fore.RED + '3. Scrapper seulement un livre')
     user_choice = 0
     while user_choice not in range(1, 4):
       try:
@@ -50,7 +51,7 @@ class Scheduler:
       self.get_user_book_choice(b, base_url)
 
   def get_user_book_choice(self, b, base_url):
-    print("Pour que je puisse scrapper un livre pour vous merci de vous rendre sur l'url suivante et de me donner le lien du livre souhaité => http://books.toscrape.com/")
+    print(Fore.CYAN + "Pour que je puisse scrapper un livre pour vous merci de vous rendre sur l'url suivante et de me donner le lien du livre souhaité => http://books.toscrape.com/")
     user_book_choice = str(input('Merci de me fournir une url valide: '))
     while 'http' not in user_book_choice:
       user_book_choice = str(input('Merci de me fournir une url valide: '))
