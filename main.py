@@ -1,11 +1,16 @@
+from scheduler import Scheduler
 from category import Category
 from book import Book
+class Main:
+  
+  base_url = 'http://books.toscrape.com'
 
-base_url = 'http://books.toscrape.com'
+  def perform(self, base_url):
+    b = Book()
+    c = Category()
+    scheduler = Scheduler()
+    scheduler.get_user_name(base_url, scheduler, c , b)
 
-b = Book()
-category = Category()
-
-category.get_all_categories_links(base_url, b)
-
-
+if __name__ == '__main__': 
+  main = Main()
+  main.perform(main.base_url)
