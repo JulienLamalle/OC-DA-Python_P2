@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from colorama import Fore, Back, Style
+from colorama import Fore
 class Scheduler:
 
   def get_user_name(self, base_url, scheduler, c, b):
