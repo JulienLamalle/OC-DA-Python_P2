@@ -4,6 +4,7 @@
 
 You can use this repo to scrape data from this [website](http://books.toscrape.com/).
 
+```
 product_page_url
 
 universal_ product_code (upc)
@@ -22,7 +23,8 @@ category
 
 review_rating
 
-image_url
+image_url 
+```
 
 All of the above information is saved in a data folder which itself has a folder for each category, a csv file is created for each category and a folder containing the image associated with each scrapbook.
 
