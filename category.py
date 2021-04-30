@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 from math import ceil
+from colorama import Fore
 class Category:
   
   def get_all_categories_links(self, url, b, user_choice, scheduler, c):
@@ -38,10 +39,11 @@ class Category:
           for book in book_url:
             final_books_urls.append(base_url + '/catalogue/' + book)
         if user_choice == 1 or user_choice == 2:
-          with tqdm(total=100) as pbar:
+          with tqdm(total=100, bar_format="{l_bar}%s{bar}%s{r_bar}" % (Fore.GREEN, Fore.RESET)) as pbar:
             for book_url in final_books_urls:
               b.get_book_informations(book_url, category, base_url)
               pbar.update(ceil((1/len(final_books_urls))*100))
+            pbar.close()
             self.get_next_page(soup, url, category, base_url, b, user_choice)
         else:
           return
