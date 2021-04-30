@@ -66,4 +66,4 @@ class Category:
         next_page_link = url + next_button['href']
         self.get_all_books_link(next_page_link, category, base_url, b, user_choice)
     else:
-      return
+      print(f'La catégorie : {category} a été scrappée avec succès !')
