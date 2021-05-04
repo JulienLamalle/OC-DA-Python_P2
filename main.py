@@ -9,10 +9,10 @@ class Main:
         self.base_url = base_url
 
     def perform(self, base_url):
-        b = Book()
-        c = Category()
+        bookie = Book()
+        catie = Category()
         scheduler = Scheduler()
-        scheduler.get_user_name(base_url, scheduler, c, b)
+        scheduler.get_user_name(base_url, scheduler, catie, bookie)
 
 
 if __name__ == "__main__":
