@@ -10,29 +10,25 @@ from slugify import slugify
 class Book:
     def get_universal_product_code(self, soup):
         try:
-            universal_product_code = soup.select_one("table > tr > td").text
-            return universal_product_code
+            return soup.select_one("table > tr > td").text
         except:
             return
 
     def get_title(self, soup):
         try:
-            title = soup.select_one("h1").text
-            return title
+            return soup.select_one("h1").text
         except:
             return
 
     def get_price_including_tax(self, soup):
         try:
-            price_including_tax = soup.select("table > tr")[3].select_one("td").text
-            return price_including_tax
+            return soup.select("table > tr")[3].select_one("td").text
         except:
             return
 
     def get_price_excluding_tax(self, soup):
         try:
-            price_excluding_tax = soup.select("table > tr")[2].select_one("td").text
-            return price_excluding_tax
+            return soup.select("table > tr")[2].select_one("td").text
         except:
             return
 
@@ -43,30 +39,26 @@ class Book:
 
     def get_product_description(self, soup):
         try:
-            product_description = soup.select_one(".sub-header + p").text
-            return product_description
+            return soup.select_one(".sub-header + p").text
         except:
             return
 
     def get_category(self, soup):
         try:
-            category = soup.select(".breadcrumb > li")[2].select_one("a").text
-            return category
+            return soup.select(".breadcrumb > li")[2].select_one("a").text
         except:
             return
 
     def get_review_rating(self, soup):
         try:
-            review_rating = soup.select("table > tr")[6].select_one("td").text
-            return review_rating
+            return soup.select("table > tr")[6].select_one("td").text
         except:
             return
 
     def get_image_url(self, soup, base_url):
         try:
             image = soup.select_one(".item > img")
-            image_url = base_url + "/" + image["src"].replace("../", "")
-            return image_url
+            return base_url + "/" + image["src"].replace("../", "")
         except:
             return
 
@@ -90,10 +82,10 @@ class Book:
                 }
                 self.save_book_informations_to_csv(book_informations, category)
                 self.save_book_image(soup, book_informations, category)
-            elif not response.status_code // 100 == 2:
+            elif response.status_code // 100 != 2:
                 print(f"Error: Unexpected response {response}")
         except requests.exceptions.RequestException as error:
-            print(f"Error: {error}")
+            print(f'Error: {error}')
 
     def save_book_image(self, soup, book_informations, category):
         try:

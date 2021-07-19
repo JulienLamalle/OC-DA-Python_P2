@@ -35,7 +35,7 @@ class Category:
                     scheduler.display_category_to_user(
                         categories, bookie, url, catie, user_choice
                     )
-            elif not response.status_code // 100 == 2:
+            elif response.status_code // 100 != 2:
                 print(f"Error: Unexpected response {response}")
         except requests.exceptions.RequestException as error:
             print(f"Error: {error}")
@@ -52,7 +52,7 @@ class Category:
                     del book_url[-1]
                     for book in book_url:
                         final_books_urls.append(base_url + "/catalogue/" + book)
-                if user_choice == 1 or user_choice == 2:
+                if user_choice in [1, 2]:
                     with tqdm(
                         total=100,
                         bar_format="{l_bar}%s{bar}%s{r_bar}" % (Fore.GREEN, Fore.RESET),
@@ -66,10 +66,10 @@ class Category:
                         )
                 else:
                     return
-            elif not response.status_code // 100 == 2:
+            elif response.status_code // 100 != 2:
                 print(f"Error: Unexpected response {response}")
         except requests.exceptions.RequestException as error:
-            print(f"Error: {error}")
+            print(f'Error: {error}')
 
     def get_next_page(self, soup, url, category, base_url, bookie, user_choice):
         next_button = soup.select_one(".next > a")

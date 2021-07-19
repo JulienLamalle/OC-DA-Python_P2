@@ -67,7 +67,7 @@ class Scheduler:
             self.url_checker(user_book_choice, bookie, base_url)
 
     def perform(self, user_choice, base_url, scheduler, catie, bookie):
-        if user_choice == 1 or user_choice == 2:
+        if user_choice in [1, 2]:
             catie.get_all_categories_links(base_url, bookie, user_choice, scheduler, catie)
         elif user_choice == 3:
             self.get_user_book_choice(bookie, base_url)
